@@ -1,0 +1,19 @@
+sudo: required
+required language: node_js
+node_js:
+  - "12"
+
+services:
+  - docker
+
+before_install:
+  - docker build -t v4rakh/gan-frontend -f Dockerfile
+
+script:
+  - docker run -e CI=true v4rakh/gan-frontend npm run lint
+  - docker run -e CI=true v4rakh/gan-frontend npm run test:coverage
+
+#after_success:
+#  - test $TRAVIS_BRANCH = "master" && docker build -t v4rakh/gan-frontend .
+#  - test $TRAVIS_BRANCH = "master" && echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+#  - test $TRAVIS_BRANCH = "master" && docker push v4rakh/gan-frontend

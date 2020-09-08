@@ -1,0 +1,75 @@
+{
+	"actions": {
+		"could_not_fetch_data": "Could not fetch data",
+		"could_not_execute_api_call": "Could not execute API call",
+		"unknown_error": "An unknown error occurred",
+		"bad_request": "Bad request got sent to the endpoint",
+		"not_found": "Given resource could not be found",
+		"general_error": "An internal error occurred"
+	},
+	"page": {
+		"login": {
+			"header": "Login",
+			"validation": {
+				"username": "Enter a username.",
+				"password": "Enter a password."
+			},
+			"form": {
+				"login": "Login",
+				"register": "Register",
+				"username": "Username",
+				"password": "Password"
+			}
+		},
+		"announcements": {
+			"no_data": "There are currently no announcements. Come back later!"
+		},
+		"admin_announcements": {
+			"title": "Title",
+			"createdAt": "Created at",
+			"create_btn": "Create announcement",
+			"create": {
+				"title": "Create an announcement"
+			},
+			"update": {
+				"title": "Update an announcement"
+			},
+			"actions": "Actions",
+			"update_action": "Update",
+			"delete_action": "Delete",
+			"delete_confirm": {
+				"title": "Delete?",
+				"description": "Are you sure you want to delete announcement '{{name}}' permanently?"
+			},
+			"form": {
+				"title": "Title",
+				"content": "Content",
+				"submit": "Send"
+			},
+			"validation": {
+				"title": "Enter a title with at least 3 characters.",
+				"content": "Enter content."
+			}
+		}
+	},
+	"navbar": {
+		"header": "UI",
+		"home": "Announcements",
+		"login": "Login",
+		"register": "Register",
+		"logout": "Logout",
+		"admin_announcements": "Admin"
+	},
+	"pagination": {
+		"first": "<<",
+		"previous": "<",
+		"next": ">",
+		"last": ">>",
+		"page": "Page ",
+		"show": "Show "
+	},
+	"misc": {
+		"loading": "Loading....",
+		"ok_button": "Ok"
+	}
+}

@@ -1,0 +1,18 @@
+body {
+	padding-top: 54px;
+}
+
+@media (min-width: 992px) {
+	body {
+		padding-top: 56px;
+	}
+}
+
+.containerWrapper {
+	margin-top: 20px;
+	overflow-x: hidden;
+}
+
+.red {
+	color: red;
+}
