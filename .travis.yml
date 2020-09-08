@@ -7,13 +7,13 @@ services:
   - docker
 
 before_install:
-  - docker build -t v4rakh/gan-frontend .
+  - docker build --no-cache -t v4rakh/gan-frontend:dev -f Dockerfile-dev .
 
 script:
-  - docker run -e CI=true v4rakh/gan-frontend npm run lint
-  - docker run -e CI=true v4rakh/gan-frontend npm run test:coverage
+  - docker run -e CI=true v4rakh/gan-frontend:dev npm run lint
+  - docker run -e CI=true v4rakh/gan-frontend:dev npm run test:coverage
 
 after_success:
-  - test $TRAVIS_BRANCH = "master" && docker build -t v4rakh/gan-frontend .
+  - test $TRAVIS_BRANCH = "master" && docker build --no-cache -t v4rakh/gan-frontend:latest .
   - test $TRAVIS_BRANCH = "master" && echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - test $TRAVIS_BRANCH = "master" && docker push v4rakh/gan-frontend
+  - test $TRAVIS_BRANCH = "master" && docker push v4rakh/gan-frontend:latest
