@@ -11,7 +11,6 @@
 .DS_Store
 
 # env files
-.env
 /public/env-config.js
 env-config.js
 
