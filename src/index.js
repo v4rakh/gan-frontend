@@ -6,7 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import 'popper.js/dist/popper';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import './style.css';
+import './App.css';
 import './translations/i18n';
 import { ModalProvider } from 'react-modal-hook';
 
