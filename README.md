@@ -1,6 +1,6 @@
 # README
 
-Frontend for g.an tiny announcement application.
+Frontend for [g.an tiny announcement application](https://github.com/v4rakh/gan).
 
 ## Install
 
