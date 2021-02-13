@@ -22,7 +22,8 @@
 			}
 		},
 		"announcements": {
-			"no_data": "There are currently no announcements. Come back later!"
+			"no_data": "There are currently no announcements. Come back later!",
+			"time_local": "{{universal}} | Local Time: {{local}}"
 		},
 		"admin_announcements": {
 			"title": "Title",

@@ -29,13 +29,13 @@ function AdminAnnouncementPage() {
 					<AnnouncementForm
 						postSubmitSuccessCallback={() => {
 							hideCreateModal();
-							fetchData({});
+							fetchData({ pageIndex: paginationConstants.DEFAULT_PAGE });
 						}}
 					/>
 				</Modal.Body>
 			</Modal>
 		);
-	}, []);
+	}, [pageCount]);
 
 	const [updateModalData, setUpdateModalData] = useState(null);
 	const [showUpdateModal, hideUpdateModal] = useModal(() => {
@@ -51,7 +51,7 @@ function AdminAnnouncementPage() {
 						contentInput={updateModalData.content}
 						postSubmitSuccessCallback={() => {
 							hideUpdateModal();
-							fetchData({});
+							fetchData({ pageIndex: paginationConstants.DEFAULT_PAGE });
 						}}
 					/>
 				</Modal.Body>
@@ -79,7 +79,7 @@ function AdminAnnouncementPage() {
 							announcementService
 								.deleteAnnouncement(deleteModalData.id)
 								.then(() => {
-									fetchData({});
+									fetchData({ pageIndex: paginationConstants.DEFAULT_PAGE });
 								})
 								.catch(() => {
 									dispatch(alertActions.error(t('actions.could_not_execute_api_call')));
@@ -146,7 +146,7 @@ function AdminAnnouncementPage() {
 		[openUpdateModal, openDeleteModal, t]
 	);
 
-	const fetchData = useCallback(({ sortBy }) => {
+	const fetchData = useCallback(({ pageIndex, pageSize, sortBy }) => {
 		const fetchId = ++fetchIdRef.current;
 		setLoading(true);
 
@@ -160,10 +160,10 @@ function AdminAnnouncementPage() {
 
 		if (fetchId === fetchIdRef.current) {
 			announcementService
-				.getAll(sortByElementId, sortByElementOrder)
+				.getAll(sortByElementId, sortByElementOrder, pageIndex, pageSize)
 				.then((data) => {
-					setData(data?.data || []);
-					setPageCount(0);
+					setData(data?.data?.content || []);
+					setPageCount(data?.data?.totalPages || 0);
 					setLoading(false);
 				})
 				.catch(() => {
@@ -188,7 +188,8 @@ function AdminAnnouncementPage() {
 				loading={loading}
 				fetchData={fetchData}
 				pageCount={pageCount}
-				withPagination={false}
+				initialPage={paginationConstants.DEFAULT_PAGE}
+				withPagination={true}
 			/>
 		</Container>
 	);

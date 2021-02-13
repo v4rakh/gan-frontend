@@ -10,7 +10,7 @@ export const announcementService = {
 	deleteAnnouncement,
 };
 
-function getAll(sortBy, sortOrder) {
+function getAll(orderBy, order, page, pageSize) {
 	const options = {
 		headers: { ...apiConstants.HEADERS, ...authHeader() },
 		data: {},
@@ -18,11 +18,17 @@ function getAll(sortBy, sortOrder) {
 
 	let queryParameters = [];
 
-	if (sortBy != null) {
-		queryParameters.push(`sortBy=${sortBy}`);
+	if (orderBy != null) {
+		queryParameters.push(`orderBy=${orderBy}`);
 	}
-	if (sortOrder != null) {
-		queryParameters.push(`sortOrder=${sortOrder}`);
+	if (order != null) {
+		queryParameters.push(`order=${order}`);
+	}
+	if (page != null) {
+		queryParameters.push(`page=${page}`);
+	}
+	if (pageSize != null) {
+		queryParameters.push(`pageSize=${pageSize}`);
 	}
 
 	return axios

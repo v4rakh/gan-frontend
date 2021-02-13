@@ -10,7 +10,7 @@
     "dev": "chmod +x ./env.sh && ./env.sh && mv env-config.js ./public/ && react-scripts start",
     "prod": "npm run clean && npm run build",
     "build": "NODE_ENV=production react-scripts build && cp env.sh .env build/",
-    "build:docker": "NODE_ENV=production sudo docker build --no-cache -t v4rakh/gan-frontend:latest -t gan-frontend:latest .",
+    "build:docker": "NODE_ENV=production sudo docker build --no-cache -t varakh/gan-frontend:latest .",
     "clean": "rm -rf build/",
     "test": "react-scripts test --env=jsdom",
     "test:coverage": "react-scripts test --env=jsdom --watchAll=false --coverage --passWithNoTests",

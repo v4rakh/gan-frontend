@@ -26,7 +26,11 @@ function Table({ columns, data, loading, pageCount: controlledPageCount, fetchDa
 		{
 			columns,
 			data,
-			initialState: { pageIndex: 0 },
+			initialState: {
+				pageIndex: paginationConstants.DEFAULT_PAGE,
+				pageSize: paginationConstants.DEFAULT_PAGE_SIZE,
+				pageCount: controlledPageCount,
+			},
 			manualPagination: true,
 			manualSortBy: true,
 			disableMultiSort: true,
@@ -79,7 +83,8 @@ function Table({ columns, data, loading, pageCount: controlledPageCount, fetchDa
 								{t('misc.loading')}
 							</td>
 						) : (
-							withPagination && (
+							withPagination &&
+							pageCount > 0 && (
 								<td colSpan="10000">
 									{t('pagination.page')} {pageIndex + 1} of {pageOptions.length}{' '}
 								</td>
@@ -149,7 +154,7 @@ function Table({ columns, data, loading, pageCount: controlledPageCount, fetchDa
 								{/* eslint-disable-next-line jsx-a11y/no-onchange */}
 								<select
 									className="custom-select col-sm"
-									value={pageSize}
+									value={pageSize || paginationConstants.DEFAULT_PAGE_SIZE}
 									onChange={(e) => {
 										setPageSize(Number(e.target.value));
 									}}>
