@@ -3,17 +3,22 @@ import _ from 'lodash';
 import { paginationConstants } from '../../constants/paginationConstants';
 import { announcementService } from '../../services/announcementService';
 import LoadingSpinner from '../LoadingSpinner';
-import { Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { alertActions } from '../../actions/alertActions';
 import { extractApiErrorMessage } from '../../helpers/api';
+import Announcement from '../Announcement';
+import { Link } from 'react-router-dom';
+import { routesConstants } from '../../constants/routesConstants';
+import { Button } from 'react-bootstrap';
+import { webHelper } from '../../helpers/webHelper';
 
 function AnnouncementsPage() {
 	const dispatch = useDispatch();
+
 	const [t] = useTranslation();
 	const [data, setData] = useState([]);
-	const [page, setPage] = useState(paginationConstants.DEFAULT_PAGE);
+	const [page, setPage] = useState(parseInt(webHelper.getQueryParameter('page')) || paginationConstants.DEFAULT_PAGE);
 	const [pageCount, setPageCount] = useState(0);
 	const [loading, setLoading] = useState(false);
 	const fetchIdRef = useRef(0);
@@ -85,22 +90,15 @@ function AnnouncementsPage() {
 	} else {
 		return data && data.length > 0 ? (
 			<div>
+				<div className="float-right">
+					<small className="text-muted text-center">
+						<Link to={routesConstants.SUBSCRIPTION_CREATE}>{t('page.announcements.subscribe')}</Link>
+					</small>
+				</div>
+				<br />
 				{data.map((announcement) => (
 					<React.Fragment key={`fragment_${announcement.id}`}>
-						<Card key={announcement.id}>
-							<Card.Header>{announcement.title}</Card.Header>
-							<Card.Body>
-								<p className="card-text">{announcement.content}</p>
-							</Card.Body>
-							<Card.Footer>
-								<small className="text-muted text-center">
-									{t('page.announcements.time_local', {
-										universal: new Date(announcement.createdAt).toUTCString(),
-										local: new Date(announcement.createdAt).toLocaleString(),
-									})}
-								</small>
-							</Card.Footer>
-						</Card>
+						<Announcement announcement={announcement} />
 						<br />
 					</React.Fragment>
 				))}
@@ -108,44 +106,52 @@ function AnnouncementsPage() {
 					<nav>
 						<ul className="pagination">
 							<li className={canPreviousPage() ? 'page-item' : 'page-item disabled'}>
-								<button
+								<Button
+									as={Link}
+									to={`${routesConstants.ANNOUNCEMENTS}?page=0`}
+									onClick={() => gotoPage(0)}
 									className="page-link"
 									aria-label={t('pagination.first')}
-									onClick={() => gotoPage(0)}
 									disabled={!canPreviousPage()}>
 									<span aria-hidden="true">&laquo;</span>
 									<span className="sr-only">{t('pagination.first')}</span>
-								</button>
+								</Button>
 							</li>
 							<li className={canPreviousPage() ? 'page-item' : 'page-item disabled'}>
-								<button
+								<Button
 									className="page-link"
+									as={Link}
+									to={`${routesConstants.ANNOUNCEMENTS}?page=${page - 1}`}
 									aria-label={t('pagination.previous')}
 									onClick={() => previousPage()}
 									disabled={!canPreviousPage()}>
 									<span aria-hidden="true">&lsaquo;</span>
 									<span className="sr-only">{t('pagination.previous')}</span>
-								</button>
+								</Button>
 							</li>
 							<li className={canNextPage() ? 'page-item' : 'page-item disabled'}>
-								<button
+								<Button
 									className="page-link"
+									as={Link}
+									to={`${routesConstants.ANNOUNCEMENTS}?page=${page + 1}`}
 									aria-label={t('pagination.next')}
 									onClick={() => nextPage()}
 									disabled={!canNextPage()}>
 									<span aria-hidden="true">&rsaquo;</span>
 									<span className="sr-only">{t('pagination.next')}</span>
-								</button>
+								</Button>
 							</li>
 							<li className={canNextPage() ? 'page-item' : 'page-item disabled'}>
-								<button
+								<Button
 									className="page-link"
 									aria-label={t('pagination.last')}
+									as={Link}
+									to={`${routesConstants.ANNOUNCEMENTS}?page=${pageCount - 1}`}
 									onClick={() => gotoPage(pageCount - 1)}
 									disabled={!canNextPage()}>
 									<span aria-hidden="true">&raquo;</span>
 									<span className="sr-only">{t('pagination.last')}</span>
-								</button>
+								</Button>
 							</li>
 						</ul>
 					</nav>

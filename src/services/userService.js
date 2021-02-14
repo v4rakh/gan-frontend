@@ -13,7 +13,7 @@ function login(username, password) {
 	};
 
 	return axios
-		.get(`${apiConstants.URL}/api/admin/login`, options)
+		.get(`${apiConstants.URL}/api/v1/admin/login`, options)
 		.then(handleResponse)
 		.then(() => {
 			const user = { username: username, password: password };

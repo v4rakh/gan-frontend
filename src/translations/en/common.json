@@ -5,6 +5,7 @@
 		"unknown_error": "An unknown error occurred",
 		"bad_request": "Bad request got sent to the endpoint",
 		"not_found": "Given resource could not be found",
+		"conflict": "A resource already exists",
 		"general_error": "An internal error occurred"
 	},
 	"page": {
@@ -21,9 +22,72 @@
 				"password": "Password"
 			}
 		},
+		"announcement": {
+			"no_data": "No announcement with ID '{{id}}' found. Come back later!"
+		},
 		"announcements": {
 			"no_data": "There are currently no announcements. Come back later!",
-			"time_local": "{{universal}} | Local Time: {{local}}"
+			"time_local": "{{universal}} | Local Time: {{local}}",
+			"subscribe": "Subscribe"
+		},
+		"subscription_link": {
+			"create": "Subscribe",
+			"delete": "Unsubscribe",
+			"verify": "Confirm subscription",
+			"rescue": "Resend code"
+		},
+		"subscription_create": {
+			"form": {
+				"address": "Mail address",
+				"address_hint": "Please provide a valid mail address",
+				"title": "Subscribe",
+				"button_title": "Subscribe now",
+				"success": "Confirm your subscription. A mail has been sent to {{address}}."
+			}
+		},
+		"subscription_rescue": {
+			"form": {
+				"address": "Mail address",
+				"address_hint": "Please provide a valid mail address",
+				"title": "Lost token?",
+				"button_title": "Send",
+				"success": "A mail has been sent to {{address}}."
+			}
+		},
+		"subscription_delete": {
+			"form": {
+				"address": "Mail address",
+				"address_hint": "Please provide a valid mail address",
+				"token": "Token",
+				"token_hint": "Please provide a valid token",
+				"title": "Delete subscription",
+				"button_title": "Unsubscribe",
+				"success": "You've been unsubscribed successfully. A confirmation mail has been sent to {{address}}."
+			}
+		},
+		"subscription_verify": {
+			"form": {
+				"address": "Mail address",
+				"address_hint": "Please provide a valid mail address",
+				"token": "Token",
+				"token_hint": "Please provide a valid token",
+				"title": "Confirm my subscription",
+				"button_title": "Confirm",
+				"success": "Your subscription has been confirmed successfully."
+			}
+		},
+		"admin_subscriptions": {
+			"createdAt": "Created at",
+			"updatedAt": "Updated at",
+			"address": "Address",
+			"state": "State",
+			"token": "Token",
+			"actions": "Actions",
+			"delete_action": "Delete",
+			"delete_confirm": {
+				"title": "Delete?",
+				"description": "Are you sure you want to delete subscription '{{address}}' permanently?"
+			}
 		},
 		"admin_announcements": {
 			"title": "Title",
@@ -59,7 +123,8 @@
 		"login": "Login",
 		"register": "Register",
 		"logout": "Logout",
-		"admin_announcements": "Admin"
+		"admin_announcements": "[Admin] Announcements",
+		"admin_subscriptions": "[Admin] Subscriptions"
 	},
 	"pagination": {
 		"first": "<<",

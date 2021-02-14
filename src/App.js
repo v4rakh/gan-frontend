@@ -13,6 +13,12 @@ import IndexPage from './components/pages/IndexPage';
 import { Alert, Container } from 'react-bootstrap';
 import { appConstants } from './constants/appConstants';
 import AnnouncementsPage from './components/pages/AnnouncementsPage';
+import AdminSubscriptionsPage from './components/pages/AdminSubscriptionPage';
+import SubscriptionCreatePage from './components/pages/SubscriptionCreatePage';
+import SubscriptionRescuePage from './components/pages/SubscriptionRescuePage';
+import SubscriptionDeletePage from './components/pages/SubscriptionDeletePage';
+import SubscriptionVerifyPage from './components/pages/SubscriptionVerifyPage';
+import AnnouncementPage from './components/pages/AnnouncementPage';
 
 function App() {
 	const alert = useSelector((state) => state.alert);
@@ -35,7 +41,13 @@ function App() {
 				{alert.message && <Alert variant={alert.type}>{alert.message}</Alert>}
 				<Switch>
 					<PrivateRoute exact path={routesConstants.ADMIN_ANNOUNCEMENTS} component={AdminAnnouncementPage} />
+					<PrivateRoute exact path={routesConstants.ADMIN_SUBSCRIPTIONS} component={AdminSubscriptionsPage} />
 					<Route exact path={routesConstants.ANNOUNCEMENTS} component={AnnouncementsPage} />
+					<Route exact path={routesConstants.ANNOUNCEMENT_DETAIL} component={AnnouncementPage} />
+					<Route exact path={routesConstants.SUBSCRIPTION_CREATE} component={SubscriptionCreatePage} />
+					<Route exact path={routesConstants.SUBSCRIPTION_VERIFY} component={SubscriptionVerifyPage} />
+					<Route exact path={routesConstants.SUBSCRIPTION_RESCUE} component={SubscriptionRescuePage} />
+					<Route exact path={routesConstants.SUBSCRIPTION_DELETE} component={SubscriptionDeletePage} />
 					<Route exact path={routesConstants.LOGIN} component={LoginPage} />
 					<Route exact path={routesConstants.INDEX} component={IndexPage} />
 					<Redirect from="*" to={routesConstants.INDEX} />

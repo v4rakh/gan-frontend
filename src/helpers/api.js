@@ -3,6 +3,7 @@ import { userService } from '../services/userService';
 
 const ERROR_BAD_REQUEST = 'BadRequest';
 const ERROR_NOT_FOUND = 'NotFound';
+const ERROR_CONFLICT = 'Conflict';
 const ERROR_GENERAL = 'GeneralError';
 
 export const extractApiErrorMessage = (response) => {
@@ -18,6 +19,10 @@ export const extractApiErrorMessage = (response) => {
 
 	if (response?.data?.status === ERROR_NOT_FOUND) {
 		return i18n.t('actions.not_found');
+	}
+
+	if (response?.data?.status === ERROR_CONFLICT) {
+		return i18n.t('actions.conflict');
 	}
 
 	if (response?.data?.status === ERROR_GENERAL) {
