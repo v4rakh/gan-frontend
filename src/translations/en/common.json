@@ -22,6 +22,9 @@
 				"password": "Password"
 			}
 		},
+		"announcement": {
+			"no_data": "No announcement with ID '{{id}}' found. Come back later!"
+		},
 		"announcements": {
 			"no_data": "There are currently no announcements. Come back later!",
 			"time_local": "{{universal}} | Local Time: {{local}}",

@@ -4,6 +4,7 @@ export const routesConstants = {
 	LOGIN: '/login',
 	LOGOUT: '/logout',
 	ANNOUNCEMENTS: '/announcements',
+	ANNOUNCEMENT_DETAIL: '/announcements/:id',
 	SUBSCRIPTION_CREATE: '/subscriptions/create',
 	SUBSCRIPTION_RESCUE: '/subscriptions/rescue',
 	SUBSCRIPTION_VERIFY: '/subscriptions/verify',

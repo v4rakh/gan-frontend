@@ -5,6 +5,7 @@ import handleResponse from './responseUtil';
 
 export const announcementService = {
 	getAll,
+	getAnnouncement,
 	createAnnouncement,
 	updateAnnouncement,
 	deleteAnnouncement,
@@ -12,7 +13,7 @@ export const announcementService = {
 
 function getAll(orderBy, order, page, pageSize) {
 	const options = {
-		headers: { ...apiConstants.HEADERS, ...authHeader() },
+		headers: { ...apiConstants.HEADERS },
 		data: {},
 	};
 
@@ -37,6 +38,15 @@ function getAll(orderBy, order, page, pageSize) {
 			options
 		)
 		.then(handleResponse);
+}
+
+function getAnnouncement(id) {
+	const options = {
+		headers: { ...apiConstants.HEADERS },
+		data: {},
+	};
+
+	return axios.get(`${apiConstants.URL}/api/v1/announcements/${id}`, options).then(handleResponse);
 }
 
 function createAnnouncement(title, content) {

@@ -10,12 +10,15 @@ import { extractApiErrorMessage } from '../../helpers/api';
 import Announcement from '../Announcement';
 import { Link } from 'react-router-dom';
 import { routesConstants } from '../../constants/routesConstants';
+import { Button } from 'react-bootstrap';
+import { webHelper } from '../../helpers/webHelper';
 
 function AnnouncementsPage() {
 	const dispatch = useDispatch();
+
 	const [t] = useTranslation();
 	const [data, setData] = useState([]);
-	const [page, setPage] = useState(paginationConstants.DEFAULT_PAGE);
+	const [page, setPage] = useState(parseInt(webHelper.getQueryParameter('page')) || paginationConstants.DEFAULT_PAGE);
 	const [pageCount, setPageCount] = useState(0);
 	const [loading, setLoading] = useState(false);
 	const fetchIdRef = useRef(0);
@@ -103,44 +106,52 @@ function AnnouncementsPage() {
 					<nav>
 						<ul className="pagination">
 							<li className={canPreviousPage() ? 'page-item' : 'page-item disabled'}>
-								<button
+								<Button
+									as={Link}
+									to={`${routesConstants.ANNOUNCEMENTS}?page=0`}
+									onClick={() => gotoPage(0)}
 									className="page-link"
 									aria-label={t('pagination.first')}
-									onClick={() => gotoPage(0)}
 									disabled={!canPreviousPage()}>
 									<span aria-hidden="true">&laquo;</span>
 									<span className="sr-only">{t('pagination.first')}</span>
-								</button>
+								</Button>
 							</li>
 							<li className={canPreviousPage() ? 'page-item' : 'page-item disabled'}>
-								<button
+								<Button
 									className="page-link"
+									as={Link}
+									to={`${routesConstants.ANNOUNCEMENTS}?page=${page - 1}`}
 									aria-label={t('pagination.previous')}
 									onClick={() => previousPage()}
 									disabled={!canPreviousPage()}>
 									<span aria-hidden="true">&lsaquo;</span>
 									<span className="sr-only">{t('pagination.previous')}</span>
-								</button>
+								</Button>
 							</li>
 							<li className={canNextPage() ? 'page-item' : 'page-item disabled'}>
-								<button
+								<Button
 									className="page-link"
+									as={Link}
+									to={`${routesConstants.ANNOUNCEMENTS}?page=${page + 1}`}
 									aria-label={t('pagination.next')}
 									onClick={() => nextPage()}
 									disabled={!canNextPage()}>
 									<span aria-hidden="true">&rsaquo;</span>
 									<span className="sr-only">{t('pagination.next')}</span>
-								</button>
+								</Button>
 							</li>
 							<li className={canNextPage() ? 'page-item' : 'page-item disabled'}>
-								<button
+								<Button
 									className="page-link"
 									aria-label={t('pagination.last')}
+									as={Link}
+									to={`${routesConstants.ANNOUNCEMENTS}?page=${pageCount - 1}`}
 									onClick={() => gotoPage(pageCount - 1)}
 									disabled={!canNextPage()}>
 									<span aria-hidden="true">&raquo;</span>
 									<span className="sr-only">{t('pagination.last')}</span>
-								</button>
+								</Button>
 							</li>
 						</ul>
 					</nav>

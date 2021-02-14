@@ -2,6 +2,8 @@ import { Card } from 'react-bootstrap';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import { routesConstants } from '../constants/routesConstants';
+import { generatePath, NavLink } from 'react-router-dom';
 
 function Announcement({ announcement }) {
 	const [t] = useTranslation();
@@ -10,7 +12,9 @@ function Announcement({ announcement }) {
 
 	return (
 		<Card key={id}>
-			<Card.Header>{title}</Card.Header>
+			<Card.Header>
+				<NavLink to={generatePath(routesConstants.ANNOUNCEMENT_DETAIL, { id })}>{title}</NavLink>
+			</Card.Header>
 			<Card.Body>
 				<p className="card-text">{content}</p>
 			</Card.Body>

@@ -9,19 +9,15 @@ import { useDispatch } from 'react-redux';
 import { browserHistory } from '../../helpers/history';
 import { routesConstants } from '../../constants/routesConstants';
 import SubscriptionLinks from '../SubscriptionLinks';
-import { useLocation } from 'react-router-dom';
+import { webHelper } from '../../helpers/webHelper';
 
 function SubscriptionDeletePage() {
 	const [t] = useTranslation();
 	const dispatch = useDispatch();
 
-	function useQuery() {
-		return new URLSearchParams(useLocation().search);
-	}
-
 	const [inputs, setInputs] = useState({
-		address: useQuery().get('address') || '',
-		token: useQuery().get('token') || '',
+		address: webHelper.getQueryParameter('address') || '',
+		token: webHelper.getQueryParameter('token') || '',
 	});
 	const [submitted, setSubmitted] = useState(false);
 	const { address, token } = inputs;
