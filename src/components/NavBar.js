@@ -31,6 +31,12 @@ function NavBar() {
 							requiresAdmin={true}
 						/>
 						<NavBarItem
+							route={routesConstants.ADMIN_SUBSCRIPTIONS}
+							label={t('navbar.admin_subscriptions')}
+							requiresAuth={true}
+							requiresAdmin={true}
+						/>
+						<NavBarItem
 							route={routesConstants.LOGOUT}
 							label={t('navbar.logout')}
 							requiresAuth={true}

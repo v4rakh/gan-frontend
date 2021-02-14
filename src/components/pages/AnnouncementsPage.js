@@ -3,11 +3,13 @@ import _ from 'lodash';
 import { paginationConstants } from '../../constants/paginationConstants';
 import { announcementService } from '../../services/announcementService';
 import LoadingSpinner from '../LoadingSpinner';
-import { Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { alertActions } from '../../actions/alertActions';
 import { extractApiErrorMessage } from '../../helpers/api';
+import Announcement from '../Announcement';
+import { Link } from 'react-router-dom';
+import { routesConstants } from '../../constants/routesConstants';
 
 function AnnouncementsPage() {
 	const dispatch = useDispatch();
@@ -85,22 +87,15 @@ function AnnouncementsPage() {
 	} else {
 		return data && data.length > 0 ? (
 			<div>
+				<div className="float-right">
+					<small className="text-muted text-center">
+						<Link to={routesConstants.SUBSCRIPTION_CREATE}>{t('page.announcements.subscribe')}</Link>
+					</small>
+				</div>
+				<br />
 				{data.map((announcement) => (
 					<React.Fragment key={`fragment_${announcement.id}`}>
-						<Card key={announcement.id}>
-							<Card.Header>{announcement.title}</Card.Header>
-							<Card.Body>
-								<p className="card-text">{announcement.content}</p>
-							</Card.Body>
-							<Card.Footer>
-								<small className="text-muted text-center">
-									{t('page.announcements.time_local', {
-										universal: new Date(announcement.createdAt).toUTCString(),
-										local: new Date(announcement.createdAt).toLocaleString(),
-									})}
-								</small>
-							</Card.Footer>
-						</Card>
+						<Announcement announcement={announcement} />
 						<br />
 					</React.Fragment>
 				))}

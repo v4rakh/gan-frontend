@@ -1,7 +1,7 @@
 import { authHeader } from '../helpers/authHeader';
 import { apiConstants } from '../constants/apiConstants';
 import axios from 'axios';
-import { userService } from './userService';
+import handleResponse from './responseUtil';
 
 export const announcementService = {
 	getAll,
@@ -33,7 +33,7 @@ function getAll(orderBy, order, page, pageSize) {
 
 	return axios
 		.get(
-			`${apiConstants.URL}/api/announcements${queryParameters.length > 0 ? '?' + queryParameters.join('&') : ''}`,
+			`${apiConstants.URL}/api/v1/announcements${queryParameters.length > 0 ? '?' + queryParameters.join('&') : ''}`,
 			options
 		)
 		.then(handleResponse);
@@ -45,7 +45,7 @@ function createAnnouncement(title, content) {
 		data: {},
 	};
 
-	return axios.post(`${apiConstants.URL}/api/admin/announcements`, { title, content }, options).then(handleResponse);
+	return axios.post(`${apiConstants.URL}/api/v1/admin/announcements`, { title, content }, options).then(handleResponse);
 }
 
 function updateAnnouncement(id, title, content) {
@@ -54,7 +54,9 @@ function updateAnnouncement(id, title, content) {
 		data: {},
 	};
 
-	return axios.put(`${apiConstants.URL}/api/admin/announcements`, { id, title, content }, options).then(handleResponse);
+	return axios
+		.put(`${apiConstants.URL}/api/v1/admin/announcements`, { id, title, content }, options)
+		.then(handleResponse);
 }
 
 function deleteAnnouncement(id) {
@@ -62,23 +64,5 @@ function deleteAnnouncement(id) {
 		headers: { ...apiConstants.HEADERS, ...authHeader() },
 		data: {},
 	};
-	return axios.delete(`${apiConstants.URL}/api/admin/announcements/${id}`, options).then(handleResponse);
-}
-
-function handleResponse(response) {
-	if (response.status !== 200 && response.status !== 204) {
-		if (response.status === 401) {
-			userService.logout();
-			window.location.reload(true);
-		}
-
-		const error = (response.data && response.data.message) || response.statusText;
-		return Promise.reject(error);
-	}
-
-	if (response.data) {
-		return response.data;
-	}
-
-	return null;
+	return axios.delete(`${apiConstants.URL}/api/v1/admin/announcements/${id}`, options).then(handleResponse);
 }
