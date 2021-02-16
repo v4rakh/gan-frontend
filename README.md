@@ -43,26 +43,36 @@ The following environment variables can be used to modify application behavior.
    
 ### Docker
 
+#### Run
+
+Default docker user is `nginx` (`uid=101`) and group is `nginx` (`gid=101`).
+
+```sh
+sudo docker run -p 3000:80 \
+    --name gan-frontend \
+    -e API_URL=http://192.168.1.11:8080 \
+    varakh/gan-frontend:latest
+```
+
+#### Build
+
 To build docker images, run `npm run build:docker` or manually do the following
 
 ```
 export IMG_NAME="gan-frontend";
 export IMG_TAG="latest";
-sudo docker build --no-cache -t IMG_NAME:IMG_TAG .
+sudo docker build --rm --no-cache -t ${IMG_NAME}:${IMG_TAG} .
 
 and/or
 
-sudo docker build --no-cache -t REMOTE_REPO_URL/IMG_NAME:IMG_TAG .
-sudo docker push REMOTE_REPO_URL/IMG_NAME:IMG_TAG
+export IMG_NAME="gan-frontend";
+export IMG_TAG="latest";
+export REMOTE_REPO_URL="varakh";
+sudo docker build --rm --no-cache -t ${REMOTE_REPO_URL}/${IMG_NAME}:${IMG_TAG} .
+sudo docker push ${REMOTE_REPO_URL}/${IMG_NAME}:${IMG_TAG}
 ```
 
 Run the built image with any environment variable from the configuration section, e.g. like
-
-```sh
-sudo docker run -p 3000:80 \
-    -e API_URL=http://192.168.1.11:8080 \
-    gan-frontend:latest
-```
 
 **IMPORTANT:** `npm start` (`Dockerfile-dev` setup) needs the docker container to start with `docker -it` (interactive mode) 
 which is required for create-react-scripts `>= 3.4.1`. You might also want to edit your `docker-compose` files to 

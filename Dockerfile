@@ -1,27 +1,51 @@
-FROM node:14-alpine as build
+#
+# Build image
+#
+FROM node:14-alpine as builder
 LABEL maintainer="Varakh <varakh@varakh.de>"
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
-ADD package.json /usr/src/app/package.json
-COPY public /usr/src/app/public
-COPY src /usr/src/app/src
+RUN mkdir -p /app
+WORKDIR /app
+ENV PATH /app/node_modules/.bin:$PATH
 
-RUN npm config set unsafe-perm true
-RUN npm install --silent
-RUN npm install react-scripts -g --silent
-RUN npm run build
+ADD package.json /app/package.json
+ADD package-lock.json /app/package-lock.json
+ADD .eslintrc.json /app/.eslintrc.json
+ADD docker-env /app/.env
+ADD  env.sh /app/env.sh
+COPY public /app/public
+COPY src /app/src
 
+RUN npm config set unsafe-perm true && \
+    npm install --silent && \
+    npm install react-scripts -g --silent && \
+    npm run build
+
+#
+# Actual image
+#
 FROM nginx:alpine
 LABEL maintainer="Varakh <varakh@varakh.de>"
+
+ENV USER nginx
+ENV GROUP nginx
+#ENV UID 101
+#ENV GID 101
+
+ENV PORT 80
+
 COPY docker-nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /usr/src/app/build /usr/share/nginx/html
+COPY --from=builder /app/build /usr/share/nginx/html
+COPY env.sh .
+COPY docker-env .
+
+RUN apk --update upgrade && \
+    apk add bash && \
+    rm -rf /var/cache/apk/* && \
+    chmod +x env.sh && \
+    chown -R ${USER}:${GROUP} /usr/share/nginx/html
 
 WORKDIR /usr/share/nginx/html
-COPY ./env.sh .
-COPY .env .
-RUN apk add --no-cache bash
-RUN chmod +x env.sh
 
+EXPOSE ${PORT}
 CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
