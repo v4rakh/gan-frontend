@@ -28,7 +28,7 @@ The following environment variables can be used to modify application behavior.
 | Variable             | Purpose               | Required      | Default                           |
 |:---------------------|:----------------------|:--------------|:----------------------------------|
 | REACT_APP_API_URL    | The API URL           | required      | http://localhost:8080             |
-| REACT_APP_TITLE      | The document's title  | optional      | Example UI                        |
+| REACT_APP_APP_TITLE  | The document's title  | optional      | Example UI                        |
 
 ## Release & deployment
 
