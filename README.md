@@ -2,6 +2,8 @@
 
 Frontend for [g.an tiny announcement application](https://github.com/v4rakh/gan).
 
+Image is available on [Docker Hub](https://hub.docker.com/r/varakh/gan-frontend).
+
 ## Install
 
 1. Copy `.npmrc.example` to `.npmrc`
