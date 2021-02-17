@@ -13,6 +13,14 @@
 # env files
 /public/env-config.js
 env-config.js
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
 
 .npmrc
 npm-debug.log*

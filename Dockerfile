@@ -11,7 +11,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 ADD package.json /app/package.json
 ADD package-lock.json /app/package-lock.json
 ADD .eslintrc.json /app/.eslintrc.json
-ADD docker-env /app/.env
+ADD .env.example /app/.env.example
 ADD  env.sh /app/env.sh
 COPY public /app/public
 COPY src /app/src
@@ -19,7 +19,7 @@ COPY src /app/src
 RUN npm config set unsafe-perm true && \
     npm install --silent && \
     npm install react-scripts -g --silent && \
-    npm run build
+    npm run build-unix
 
 #
 # Actual image
@@ -37,7 +37,6 @@ ENV PORT 80
 COPY docker-nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /app/build /usr/share/nginx/html
 COPY env.sh .
-COPY docker-env .
 
 RUN apk --update upgrade && \
     apk add bash && \
@@ -48,4 +47,4 @@ RUN apk --update upgrade && \
 WORKDIR /usr/share/nginx/html
 
 EXPOSE ${PORT}
-CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
+CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env.sh && chown -R ${USER}:${GROUP} /usr/share/nginx/html/env-config.js && nginx -g \"daemon off;\""]

@@ -7,7 +7,7 @@ services:
   - docker
 
 before_install:
-  - docker build --no-cache -t varakh/gan-frontend:dev -f Dockerfile-dev .
+  - docker build --rm --no-cache -t varakh/gan-frontend:dev -f Dockerfile-dev .
 
 script:
   - docker run -e CI=true varakh/gan-frontend:dev npm run lint

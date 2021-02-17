@@ -7,10 +7,12 @@
     "npm": "^6"
   },
   "scripts": {
-    "dev": "chmod +x ./env.sh && ./env.sh && mv env-config.js ./public/ && react-scripts start",
-    "prod": "npm run clean && npm run build",
-    "build": "NODE_ENV=production react-scripts build && cp env.sh .env build/",
-    "build:docker": "NODE_ENV=production sudo docker build --no-cache -t varakh/gan-frontend:latest .",
+    "start": "react-scripts start",
+    "start-unix": "chmod +x ./env.sh && ./env.sh && mv env-config.js ./public/ && react-scripts start",
+    "build": "NODE_ENV=production react-scripts build",
+    "build-unix": "npm run clean && npm run build && cp env.sh .env.example build/ && mv build/.env.example build/.env",
+    "docker-dev-unix": "NODE_ENV=production sudo docker build --rm --no-cache -t varakh/gan-frontend:dev -f Dockerfile-dev .",
+    "docker-prod-unix": "NODE_ENV=production sudo docker build --rm --no-cache -t varakh/gan-frontend:latest .",
     "clean": "rm -rf build/",
     "test": "react-scripts test --env=jsdom",
     "test:coverage": "react-scripts test --env=jsdom --watchAll=false --coverage --passWithNoTests",

@@ -8,16 +8,16 @@ ADD .eslintrc.json /usr/src/app/.eslintrc.json
 ADD package.json /usr/src/app/package.json
 ADD package-lock.json /usr/src/app/package-lock.json
 ADD env.sh /usr/src/app/env.sh
-ADD .env /usr/src/app/.env
+ADD .env.example /usr/src/app/.env
 COPY public /usr/src/app/public
 COPY src /usr/src/app/src
 
-RUN npm config set unsafe-perm true
-RUN npm install --silent
-RUN npm install react-scripts -g --silent
-
-RUN apk add --no-cache bash
-RUN chmod +x /usr/src/app/env.sh
+RUN npm config set unsafe-perm true && \
+    npm install --silent && \
+    npm install react-scripts -g --silent && \
+    apk add --no-cache bash && \
+    rm -rf /var/cache/apk/* && \
+    chmod +x /usr/src/app/env.sh
 
 EXPOSE 3000
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start-unix"]
