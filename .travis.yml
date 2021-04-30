@@ -9,10 +9,11 @@ services:
 before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker build --rm --no-cache -t varakh/gan-frontend:dev -f Dockerfile-dev .
-
+  
 script:
   - docker run -e CI=true varakh/gan-frontend:dev npm run lint
   - docker run -e CI=true varakh/gan-frontend:dev npm run test:coverage
+  
 after_success:
   - test $TRAVIS_BRANCH = "master" && docker build --rm --no-cache -t varakh/gan-frontend:latest .
   - test $TRAVIS_BRANCH = "master" && docker push varakh/gan-frontend:latest
