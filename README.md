@@ -84,3 +84,4 @@ Run the built image with any environment variable from the configuration section
 **IMPORTANT:** `npm start` (`Dockerfile-dev` setup) needs the docker container to start with `docker -it` (interactive mode) 
 which is required for create-react-scripts `>= 3.4.1`. You might also want to edit your `docker-compose` files to 
 account for the interactive mode requirement.
+
