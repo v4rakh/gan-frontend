@@ -1,3 +1,3 @@
 export const localStorageConstants = {
-	SESSION: 'session',
+    SESSION: 'session',
 };

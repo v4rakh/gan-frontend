@@ -10,26 +10,26 @@ import { appConstants } from '../constants/appConstants';
 const loggerMiddleware = createLogger();
 
 const persistConfig = {
-	key: 'redux-store',
-	whitelist: ['authentication'],
-	storage,
-	migrate: async (state) => {
-		if (state && state.auth && state.auth.username && state.auth.password) {
-			let res = await checkAuthAfterDeserialize(state.auth.username, state.auth.password);
+    key: 'redux-store',
+    whitelist: ['authentication'],
+    storage,
+    migrate: async (state) => {
+        if (state && state.auth && state.auth.username && state.auth.password) {
+            let res = await checkAuthAfterDeserialize(state.auth.username, state.auth.password);
 
-			if (!res) {
-				state.auth = null;
-			}
-		}
+            if (!res) {
+                state.auth = null;
+            }
+        }
 
-		return Promise.resolve(state);
-	},
+        return Promise.resolve(state);
+    },
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = createStore(
-	persistedReducer,
-	appConstants.PRODUCTION ? applyMiddleware(thunkMiddleware) : applyMiddleware(thunkMiddleware, loggerMiddleware)
+    persistedReducer,
+    appConstants.PRODUCTION ? applyMiddleware(thunkMiddleware) : applyMiddleware(thunkMiddleware, loggerMiddleware)
 );
 export const persistedStore = persistStore(store);

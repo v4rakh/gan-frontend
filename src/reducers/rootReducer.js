@@ -4,8 +4,8 @@ import { authentication } from './authenticationReducer';
 import { alert } from './alertReducer';
 
 const rootReducer = combineReducers({
-	authentication,
-	alert,
+    authentication,
+    alert,
 });
 
 export default rootReducer;

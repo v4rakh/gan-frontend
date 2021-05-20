@@ -14,12 +14,12 @@ import App from './App';
 import { persistedStore, store } from './helpers/store';
 
 render(
-	<Provider store={store}>
-		<PersistGate persistor={persistedStore}>
-			<ModalProvider>
-				<App />
-			</ModalProvider>
-		</PersistGate>
-	</Provider>,
-	document.getElementById('root')
+    <Provider store={store}>
+        <PersistGate persistor={persistedStore}>
+            <ModalProvider>
+                <App />
+            </ModalProvider>
+        </PersistGate>
+    </Provider>,
+    document.getElementById('root')
 );

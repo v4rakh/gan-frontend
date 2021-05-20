@@ -3,15 +3,15 @@ import { initReactI18next } from 'react-i18next';
 import common_en from './en/common.json';
 
 i18n.use(initReactI18next).init({
-	interpolation: { escapeValue: false },
-	lng: 'en',
-	ns: ['common'],
-	defaultNS: 'common',
-	resources: {
-		en: {
-			common: common_en,
-		},
-	},
+    interpolation: { escapeValue: false },
+    lng: 'en',
+    ns: ['common'],
+    defaultNS: 'common',
+    resources: {
+        en: {
+            common: common_en,
+        },
+    },
 });
 
 export default i18n;

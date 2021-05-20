@@ -8,8 +8,8 @@ Image is available on [Docker Hub](https://hub.docker.com/r/varakh/gan-frontend)
 
 1. Copy `.env.example` to `.env` and adjust to your liking. For more on configuration settings and deployment see below.
 2. Run `npm install`
-3. Run `npm run start-unix` if you're on a UNIX based system or `npm run start` for non-UNIX systems. If on UNIX, a 
-   `env.config.js` will automatically be created and used. For development purpose, you can still set usual environment 
+3. Run `npm run start-unix` if you're on a UNIX based system or `npm run start` for non-UNIX systems. If on UNIX, a
+   `env.config.js` will automatically be created and used. For development purpose, you can still set usual environment
    variables for configuration also with the `start` command.
 
 Info: The `env.sh` has been introduced to also allow production builds to use docker environment variables in a
@@ -37,17 +37,19 @@ The following environment variables can be used to modify application behavior.
 1. Run `npm run build-unix` or `npm run build` and a production build will be placed into the `build/` folder.
 2. Copy the contents of the `build/` folder to your web server root you like to serve
 3. To adapt configuration values, you can do it i) manually or ii) via `env.sh` script
-    * a) Add/edit `env-config.js` file of the web server root and add the following (ensure to define every configuration value from the above table):
-    
+    * a) Add/edit `env-config.js` file of the web server root and add the following (ensure to define every
+      configuration value from the above table):
+
     ```js
     window._env_ = {
       REACT_APP_API_URL: "https://server-address:server-port",
       REACT_APP_APP_TITLE: "The app title",
     }
     ```
-   
-   * b) In your web server root, adapt `.env` to your liking and run `env.sh` afterwards, a `env-config.js` will be generated for you
-   
+
+    * b) In your web server root, adapt `.env` to your liking and run `env.sh` afterwards, a `env-config.js` will be
+      generated for you
+
 ### Docker
 
 #### Run
@@ -81,7 +83,8 @@ sudo docker push ${REMOTE_REPO_URL}/${IMG_NAME}:${IMG_TAG}
 
 Run the built image with any environment variable from the configuration section, e.g. like
 
-**IMPORTANT:** `npm start` (`Dockerfile-dev` setup) needs the docker container to start with `docker -it` (interactive mode) 
-which is required for create-react-scripts `>= 3.4.1`. You might also want to edit your `docker-compose` files to 
+**IMPORTANT:** `npm start` (`Dockerfile-dev` setup) needs the docker container to start with `docker -it` (interactive
+mode)
+which is required for create-react-scripts `>= 3.4.1`. You might also want to edit your `docker-compose` files to
 account for the interactive mode requirement.
 

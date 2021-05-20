@@ -21,40 +21,40 @@ import SubscriptionVerifyPage from './components/pages/SubscriptionVerifyPage';
 import AnnouncementPage from './components/pages/AnnouncementPage';
 
 function App() {
-	const alert = useSelector((state) => state.alert);
-	const dispatch = useDispatch();
+    const alert = useSelector((state) => state.alert);
+    const dispatch = useDispatch();
 
-	useEffect(() => {
-		browserHistory.listen(() => {
-			dispatch(alertActions.clear());
-		});
-	}, [dispatch]);
+    useEffect(() => {
+        browserHistory.listen(() => {
+            dispatch(alertActions.clear());
+        });
+    }, [dispatch]);
 
-	if (appConstants.TITLE) {
-		document.title = appConstants.TITLE;
-	}
+    if (appConstants.TITLE) {
+        document.title = appConstants.TITLE;
+    }
 
-	return (
-		<Router history={browserHistory}>
-			<NavBar />
-			<Container className="containerWrapper">
-				{alert.message && <Alert variant={alert.type}>{alert.message}</Alert>}
-				<Switch>
-					<PrivateRoute exact path={routesConstants.ADMIN_ANNOUNCEMENTS} component={AdminAnnouncementPage} />
-					<PrivateRoute exact path={routesConstants.ADMIN_SUBSCRIPTIONS} component={AdminSubscriptionsPage} />
-					<Route exact path={routesConstants.ANNOUNCEMENTS} component={AnnouncementsPage} />
-					<Route exact path={routesConstants.ANNOUNCEMENT_DETAIL} component={AnnouncementPage} />
-					<Route exact path={routesConstants.SUBSCRIPTION_CREATE} component={SubscriptionCreatePage} />
-					<Route exact path={routesConstants.SUBSCRIPTION_VERIFY} component={SubscriptionVerifyPage} />
-					<Route exact path={routesConstants.SUBSCRIPTION_RESCUE} component={SubscriptionRescuePage} />
-					<Route exact path={routesConstants.SUBSCRIPTION_DELETE} component={SubscriptionDeletePage} />
-					<Route exact path={routesConstants.LOGIN} component={LoginPage} />
-					<Route exact path={routesConstants.INDEX} component={IndexPage} />
-					<Redirect from="*" to={routesConstants.INDEX} />
-				</Switch>
-			</Container>
-		</Router>
-	);
+    return (
+        <Router history={browserHistory}>
+            <NavBar />
+            <Container className="containerWrapper">
+                {alert.message && <Alert variant={alert.type}>{alert.message}</Alert>}
+                <Switch>
+                    <PrivateRoute exact path={routesConstants.ADMIN_ANNOUNCEMENTS} component={AdminAnnouncementPage} />
+                    <PrivateRoute exact path={routesConstants.ADMIN_SUBSCRIPTIONS} component={AdminSubscriptionsPage} />
+                    <Route exact path={routesConstants.ANNOUNCEMENTS} component={AnnouncementsPage} />
+                    <Route exact path={routesConstants.ANNOUNCEMENT_DETAIL} component={AnnouncementPage} />
+                    <Route exact path={routesConstants.SUBSCRIPTION_CREATE} component={SubscriptionCreatePage} />
+                    <Route exact path={routesConstants.SUBSCRIPTION_VERIFY} component={SubscriptionVerifyPage} />
+                    <Route exact path={routesConstants.SUBSCRIPTION_RESCUE} component={SubscriptionRescuePage} />
+                    <Route exact path={routesConstants.SUBSCRIPTION_DELETE} component={SubscriptionDeletePage} />
+                    <Route exact path={routesConstants.LOGIN} component={LoginPage} />
+                    <Route exact path={routesConstants.INDEX} component={IndexPage} />
+                    <Redirect from="*" to={routesConstants.INDEX} />
+                </Switch>
+            </Container>
+        </Router>
+    );
 }
 
 export default App;

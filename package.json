@@ -1,72 +1,72 @@
 {
-  "name": "gan-frontend",
-  "version": "1.0.0",
-  "private": true,
-  "engines": {
-    "node": "^14",
-    "npm": "^7"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "start-unix": "chmod +x ./env.sh && ./env.sh && mv env-config.js ./public/ && react-scripts start",
-    "build": "NODE_ENV=production react-scripts build",
-    "build-unix": "npm run clean && npm run build && cp env.sh .env.example build/ && mv build/.env.example build/.env",
-    "docker-dev-unix": "NODE_ENV=production sudo docker build --rm --no-cache -t varakh/gan-frontend:dev -f Dockerfile-dev .",
-    "docker-prod-unix": "NODE_ENV=production sudo docker build --rm --no-cache -t varakh/gan-frontend:latest .",
-    "clean": "rm -rf build/",
-    "test": "react-scripts test --env=jsdom",
-    "test:coverage": "react-scripts test --env=jsdom --watchAll=false --coverage --passWithNoTests",
-    "eject": "react-scripts eject",
-    "format": "prettier \"src/**/*.{js,html}\" --write",
-    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet"
-  },
-  "dependencies": {
-    "@testing-library/jest-dom": "5.11.10",
-    "@testing-library/react": "11.2.6",
-    "@testing-library/user-event": "13.1.5",
-    "axios": "0.21.1",
-    "axios-hooks": "2.6.1",
-    "bootstrap": "4.6.0",
-    "history": "4.10.1",
-    "i18next": "20.2.1",
-    "jquery": "3.6.0",
-    "lodash": "4.17.21",
-    "popper.js": "1.16.1",
-    "prop-types": "15.7.2",
-    "react": "16.14.0",
-    "react-bootstrap": "1.5.2",
-    "react-dom": "16.14.0",
-    "react-i18next": "11.8.13",
-    "react-modal": "3.13.1",
-    "react-modal-hook": "3.0.0",
-    "react-redux": "7.2.3",
-    "react-router-dom": "5.2.0",
-    "react-scripts": "4.0.3",
-    "react-table": "7.6.3",
-    "redux": "4.0.5",
-    "redux-logger": "3.0.6",
-    "redux-persist": "6.0.0",
-    "redux-thunk": "2.3.0"
-  },
-  "devDependencies": {
-    "@babel/eslint-parser": "7.12.16",
-    "eslint": "7.19.0",
-    "eslint-config-prettier": "7.2.0",
-    "eslint-plugin-import": "2.22.1",
-    "eslint-plugin-jsx-a11y": "6.4.1",
-    "eslint-plugin-react": "7.22.0",
-    "prettier": "2.2.1"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "name": "gan-frontend",
+    "version": "1.0.0",
+    "private": true,
+    "engines": {
+        "node": "^14",
+        "npm": ">=6"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "start-unix": "chmod +x ./env.sh && ./env.sh && mv env-config.js ./public/ && react-scripts start",
+        "build": "NODE_ENV=production react-scripts build",
+        "build-unix": "npm run clean && npm run build && cp env.sh .env.example build/ && mv build/.env.example build/.env",
+        "docker-dev-unix": "NODE_ENV=production sudo docker build --rm --no-cache -t varakh/gan-frontend:dev -f Dockerfile-dev .",
+        "docker-prod-unix": "NODE_ENV=production sudo docker build --rm --no-cache -t varakh/gan-frontend:latest .",
+        "clean": "rm -rf build/",
+        "test": "react-scripts test --env=jsdom",
+        "test:coverage": "react-scripts test --env=jsdom --watchAll=false --coverage --passWithNoTests",
+        "eject": "react-scripts eject",
+        "format": "prettier \"src/**/*.{js,html}\" --write",
+        "lint": "eslint \"src/**/*.{js,jsx}\" --quiet"
+    },
+    "dependencies": {
+        "@testing-library/jest-dom": "^5.11.10",
+        "@testing-library/react": "^11.2.6",
+        "@testing-library/user-event": "^13.1.5",
+        "axios": "^0.21.1",
+        "axios-hooks": "^2.6.1",
+        "bootstrap": "^4.6.0",
+        "history": "^4.10.1",
+        "i18next": "^20.2.1",
+        "jquery": "^3.6.0",
+        "lodash": "^4.17.21",
+        "popper.js": "^1.16.1",
+        "prop-types": "^15.7.2",
+        "react": "^16.14.0",
+        "react-bootstrap": "^1.5.2",
+        "react-dom": "^16.14.0",
+        "react-i18next": "^11.8.13",
+        "react-modal": "^3.13.1",
+        "react-modal-hook": "^3.0.0",
+        "react-redux": "^7.2.3",
+        "react-router-dom": "^5.2.0",
+        "react-scripts": "^4.0.3",
+        "react-table": "^7.6.3",
+        "redux": "^4.0.5",
+        "redux-logger": "^3.0.6",
+        "redux-persist": "^6.0.0",
+        "redux-thunk": "^2.3.0"
+    },
+    "devDependencies": {
+        "@babel/eslint-parser": "^7.12.16",
+        "eslint": "^7.19.0",
+        "eslint-config-prettier": "^7.2.0",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-jsx-a11y": "^6.4.1",
+        "eslint-plugin-react": "^7.22.0",
+        "prettier": "^2.2.1"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
 }

@@ -1,19 +1,19 @@
 import { useLocation, useParams } from 'react-router-dom';
 
 export const webHelper = {
-	getQueryParameter,
-	getPathParameter,
-	useQuery,
+    getQueryParameter,
+    getPathParameter,
+    useQuery,
 };
 
 function useQuery() {
-	return new URLSearchParams(useLocation().search);
+    return new URLSearchParams(useLocation().search);
 }
 
 function getQueryParameter(key) {
-	return useQuery().get(key);
+    return useQuery().get(key);
 }
 
 function getPathParameter(key) {
-	return useParams()[key];
+    return useParams()[key];
 }
